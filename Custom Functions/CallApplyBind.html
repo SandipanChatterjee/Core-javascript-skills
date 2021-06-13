@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let name = {
+        fname: "sandipan",
+        lname: "chatterjee",
+      };
+      let printfullname = function (hometown, state) {
+        console.log(`${this.fname} ${this.lname} is from ${hometown},${state}`);
+      };
+      //call -> pass this keyword (over here -> name) along with other params to the function
+      printfullname.call(name, "kolkata", "west bengal");
+      //call -> pass this keyword (over here -> name) along with other params in array to the function
+      printfullname.apply(name, ["kolkata", "west bengal"]);
+      //call -> pass this keyword (over here -> name) along with other params to the function and it returns reference to that function
+      const printfullnameFunc = printfullname.bind(
+        name,
+        "kolkata",
+        "west bengal"
+      );
+      printfullnameFunc();
+
+      Function.prototype.newBind = function (...args) {
+        return () => {
+          console.log(args[0]);
+          this.apply(args[0], args.slice(1));
+        };
+      };
+
+      const printFullNameMyFunc = printfullname.newBind(
+        name,
+        "kolkata",
+        "west bengal"
+      );
+      printFullNameMyFunc();
+    </script>
+  </body>
+</html>
