@@ -18,7 +18,7 @@
       printfullname.call(name, "kolkata", "west bengal");
       //call -> pass this keyword (over here -> name) along with other params in array to the function
       printfullname.apply(name, ["kolkata", "west bengal"]);
-      //call -> pass this keyword (over here -> name) along with other params to the function and it returns reference to that function
+      //bind -> pass this keyword (over here -> name) along with other params to the function and it returns reference to that function
       const printfullnameFunc = printfullname.bind(
         name,
         "kolkata",
