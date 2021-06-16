@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a
+      href="https://dev.to/devabhijeet/all-front-end-interview-questions-asked-during-my-recent-job-hunt-1kge"
+      ><h2>Source of this implementation</h2></a
+    >
+    <script>
+      class CustomPromise {
+        state = "PENDING";
+        value = undefined;
+        thenCallback = [];
+        errorCallback = [];
+        constructor(action) {
+          action(this.resolver, this.reject);
+        }
+        resolver = (value) => {
+          console.log(this);
+          this.state = "SUCCESS";
+          this.value = value;
+          this.thenCallback.forEach((callback) => {
+            callback(value);
+          });
+        };
+        reject = (value) => {
+          console.log(this);
+          this.state = "FAIL";
+          this.value = value;
+          this.errorCallback.forEach((callback) => {
+            callback(value);
+          });
+        };
+        then = (callback) => {
+          this.thenCallback.push(callback);
+          return this;
+        };
+        catch = (callback) => {
+          this.errorCallback.push(callback);
+          return this;
+        };
+      }
+      const promiseInit = (resolver, reject) => {
+        setTimeout(() => {
+          let rand = Math.random() * 2;
+          if (rand > 1) {
+            resolver(rand);
+          } else {
+            reject(rand);
+          }
+        }, 1000);
+      };
+
+      const promise = new CustomPromise(promiseInit);
+      const thenCallbackHandler = (response) => {
+        console.log("success##", response);
+      };
+      const errorCallbackHandler = (error) => {
+        console.log("error##", error);
+      };
+      promise.then(thenCallbackHandler).catch(errorCallbackHandler);
+    </script>
+  </body>
+</html>

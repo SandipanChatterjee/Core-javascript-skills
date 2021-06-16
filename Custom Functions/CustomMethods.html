@@ -113,7 +113,7 @@
         return flatarr;
       };
       const flat = inputArray.newFlat();
-      console.log("flat##", flat);
+      // console.log("flat##", flat);
 
       /*****************************************Custom bind function **********************************/
 
@@ -126,7 +126,7 @@
       };
       Function.prototype.newBind = function (...args) {
         return () => {
-          console.log(args[0]);
+          // console.log(args[0]);
           this.apply(args[0], args.slice(1));
         };
       };
@@ -136,7 +136,19 @@
         "kolkata",
         "west bengal"
       );
-      printFullNameMyFunc();
+      // printFullNameMyFunc();
+      /*****************************************Custom push function **********************************/
+      Array.prototype.newPush = function () {
+        const size = this.length;
+        let args = this.slice.call(arguments);
+        for (let i = 0; i < args.length; i++) {
+          this[i + size] = args[i];
+        }
+      };
+      const newPushArr = [];
+      newPushArr.newPush("a");
+      newPushArr.newPush("b");
+      console.log(newPushArr);
     </script>
   </body>
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="https://jsvault.com/array-listener"
+      ><h2>Source of this implementation</h2></a
+    >
+    <script>
+      Array.prototype.listener = {};
+      Array.prototype.addListener = function (eventName, callback) {
+        // console.log(arguments);
+        if (!this[eventName]) {
+          this.listener[eventName] = [];
+        }
+        this.listener[eventName].push(callback);
+        // console.log(this.listener);
+      };
+      Array.prototype.newPush = function () {
+        let size = this.length;
+        const args = this.slice.call(arguments);
+        for (let i = 0; i < args.length; i++) {
+          this[i + size] = args[i];
+        }
+        this.trigger("add", args);
+      };
+      Array.prototype.trigger = function (evtName, args) {
+        if (this.listener[evtName] && this.listener[evtName].length) {
+          this.listener[evtName].forEach((callback) => {
+            callback(evtName, args);
+          });
+        }
+      };
+      const arr = [];
+      arr.addListener("add", function (args, items) {
+        console.log("items are added..", items);
+      });
+      arr.newPush("a");
+      arr.newPush("b");
+      console.log(arr);
+      setTimeout(() => {
+        arr.newPush("delayed");
+      }, 1000);
+    </script>
+  </body>
+</html>
