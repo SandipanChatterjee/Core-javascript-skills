@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*class Parent {
+        constructor(name) {
+          this.name = name;
+        }
+
+        getName() {
+          return this.name;
+        }
+      }
+
+      class Children extends Parent {
+        constructor(props) {
+          super(props);
+        }
+      }*/
+
+      function Parent(name) {
+        this.name = name;
+      }
+      Parent.prototype.getName = function () {
+        // console.log(this.name);
+        return "this.name";
+      };
+      function Children(name) {
+        // console.log(name);
+        Parent.call(this, name);
+      }
+      Children.prototype = new Parent();
+      var child = new Children("John");
+      child.getName();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const POSTS_URL = `https://jsonplaceholder.typicode.com/posts`;
+      const COMMENTS_URL = `https://jsonplaceholder.typicode.com/comments`;
+      async function fetchData() {
+        const [posts, comments] = await Promise.all([
+          fetch(POSTS_URL)
+            .then((res) => res.json())
+            .then((res) => res)
+            .catch((err) => err),
+          fetch(COMMENTS_URL)
+            .then((res) => res.json())
+            .then((res) => res)
+            .catch((err) => console.log(err)),
+        ]);
+
+        // console.log(posts, comments);
+        let mapPostsToComments = {},
+          temp = [],
+          i = 0;
+        for (let post of posts) {
+          for (let comment of comments) {
+            if (post.id == comment.postId) {
+              temp.push(comment);
+            }
+          }
+          mapPostsToComments[i] = temp;
+          temp = [];
+          i++;
+        }
+        console.log(mapPostsToComments);
+      }
+      fetchData();
+    </script>
+  </body>
+</html>
