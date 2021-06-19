@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  max-width: 1200px;
+}
+.container {
+  /* width: 800px; */
+  padding: 0 10rem;
+}
+
+.container section {
+  /* border: 1px solid #303030; */
+  margin: 1rem 0;
+  padding: 1rem 2px;
+  background: yellowgreen;
+  color: #fff;
+}
+
+.container section h2 {
+  font-size: 1.5rem;
+  margin: 0.2rem 0;
+}
+
+#footer {
+  padding: 0 10rem;
+}
