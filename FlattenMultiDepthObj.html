@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* Flatten a nested object of varying debt. */
+      const obj = {
+        level1: {
+          level2: {
+            level3: {
+              more: "stuff",
+              other: "otherz",
+              level4: {
+                the: "end",
+              },
+            },
+          },
+          level2still: {
+            last: "one",
+          },
+          am: "bored",
+        },
+        more: "what",
+        ipsum: {
+          lorem: "latin",
+        },
+      };
+      let flatObj = {};
+      const removeNesting = (obj, parent) => {
+        for (let key in obj) {
+          if (typeof obj[key] === "object") {
+            removeNesting(obj[key], parent + "_" + key);
+          } else {
+            flatObj[parent + "_" + key] = obj[key];
+          }
+        }
+      };
+      removeNesting(obj, "obj");
+      console.log(flatObj);
+    </script>
+  </body>
+</html>
