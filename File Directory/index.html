@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      import { directoryRoot } from "./DirectoryData.js";
+      //   let str = "",
+      //     tmp = "";
+      const rev = (root, index) => {
+        console.log(root, index);
+        let str = " ".repeat(index) + "|->" + root.name + "\t\n";
+        index += 5;
+        for (let el of root.children) {
+          str += structreDirectory(el, index);
+        }
+        return str;
+      };
+      const structreDirectory = (root, index) => {
+        if (root.type == "file") {
+          return " ".repeat(index) + "|->" + root.name + "\t\n";
+        }
+        return rev(root, index);
+      };
+
+      console.log(structreDirectory(directoryRoot[0], 0));
+      //   console.log(str);
+    </script>
+  </body>
+</html>
