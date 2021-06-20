@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function shuffle(arr) {
+        let arrLength = arr.length;
+        function swap(index1, arrLength, arr) {
+          let tmp = arr[arrLength - 1];
+          arr[arrLength - 1] = arr[index1];
+          arr[index1] = tmp;
+        }
+        while (arrLength - 1 > 0) {
+          let index1 = Math.floor(Math.random() * arrLength);
+          arrLength--;
+          swap(index1, arrLength, arr);
+        }
+        return arr;
+      }
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      arr = shuffle(arr);
+      console.log(arr);
+    </script>
+  </body>
+</html>
