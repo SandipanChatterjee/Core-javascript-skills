@@ -61,19 +61,16 @@
       const memoize = (fn) => {
         console.log("a");
         let cache = {};
-        const inner = (...args) => {
-          // console.log("args##", ...args);
+        return (...args) => {
           if (cache[args]) {
+            console.log("Fetchinging from cache");
             return cache[args];
           } else {
-            let result = fn(...args);
-            // console.log("result##", result);
-            cache[args] = result;
-            return result;
+            console.log("Executing and fetching results...");
+            cache[args] = fn(...args);
+            return cache[args];
           }
         };
-        console.log("b");
-        return inner;
       };
 
       function fibonacci(n) {
