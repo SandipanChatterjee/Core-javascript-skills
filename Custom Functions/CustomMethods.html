@@ -59,7 +59,6 @@
 
       /*****************************************Custom memoization function ******************************/
       const memoize = (fn) => {
-        console.log("a");
         let cache = {};
         return (...args) => {
           if (cache[args]) {
