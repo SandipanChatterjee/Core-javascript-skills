@@ -65,6 +65,17 @@
         }
         return acc;
       };
+
+      Array.prototype.newReduce2 = function (callback) {
+        // same as newReduce
+        let sum = 0,
+          res = 0;
+        for (let i = 0; i < this.length; i++) {
+          res += callback(sum, this[i]);
+          console.log("sum = ", res);
+        }
+        return res;
+      };
       const sum = arr.newReduce((a, b) => {
         return a + b;
       });
@@ -138,6 +149,11 @@
           // console.log(args[0]);
           this.apply(args[0], args.slice(1));
         };
+      };
+
+      Function.prototype.newBind2 = function (...args) {
+        // same as newBind
+        return () => this.apply(args[0], args.slice(1));
       };
 
       const printFullNameMyFunc = printfullname.newBind(
