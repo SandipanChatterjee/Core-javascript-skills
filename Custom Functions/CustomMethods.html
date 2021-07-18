@@ -39,8 +39,21 @@
         }
         return res;
       };
+
+      Array.prototype.newFilter2 = function (callback) {
+        // same as newFilter
+        let el = [];
+        for (let i = 0; i < this.length; i++) {
+          const res = callback(this[i], i, this);
+          if (res) {
+            el.push(this[i]);
+          }
+        }
+        return el;
+      };
+
       const filteredArr = arr.newFilter((el, ind) => el > 2);
-      //   console.log(filteredArr1);
+      //   console.log(filteredArr);
 
       /* ***************************************Custom reduce function *********************************/
       Array.prototype.newReduce = function (callback, startingValue) {
