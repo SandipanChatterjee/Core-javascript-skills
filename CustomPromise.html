@@ -16,11 +16,13 @@
         value = undefined;
         thenCallback = [];
         errorCallback = [];
+
         constructor(action) {
+          console.log("action#", action, this);
           action(this.resolver, this.reject);
         }
         resolver = (value) => {
-          console.log(this);
+          console.log("call#resolver", this, value);
           this.state = "SUCCESS";
           this.value = value;
           this.thenCallback.forEach((callback) => {
@@ -28,7 +30,7 @@
           });
         };
         reject = (value) => {
-          console.log(this);
+          console.log("call#reject", this);
           this.state = "FAIL";
           this.value = value;
           this.errorCallback.forEach((callback) => {

@@ -122,15 +122,17 @@
       // const flat = inputArray.flat(Infinity);
       // console.log("flat#", flat);
       Array.prototype.newFlat = function () {
-        let flatarr = [];
+        console.log(this);
+        let res = [];
         for (let i = 0; i < this.length; i++) {
           if (Array.isArray(this[i])) {
-            flatarr = [...flatarr, this.newFlat.call(this[i])];
+            const el = this[i];
+            res = res.concat(this.newFlat.call(el));
           } else {
-            flatarr.push(this[i]);
+            res.push(this[i]);
           }
         }
-        return flatarr;
+        return res;
       };
       const flat = inputArray.newFlat();
       // console.log("flat##", flat);
@@ -163,7 +165,7 @@
       );
       // printFullNameMyFunc();
       /*****************************************Custom push function **********************************/
-      Array.prototype.newPush = function () {
+      /*Array.prototype.newPush = function () {
         const size = this.length;
         let args = this.slice.call(arguments);
         for (let i = 0; i < args.length; i++) {
@@ -173,7 +175,7 @@
       const newPushArr = [];
       newPushArr.newPush("a");
       newPushArr.newPush("b");
-      console.log(newPushArr);
+      console.log(newPushArr);*/
     </script>
   </body>
 </html>
